@@ -18,6 +18,8 @@ export default {
   },
   // Deletes the book with the given id
   deleteBook: function(id) {
+    console.log('deleting ' + id);
+    
     return axios.delete("/api/books/" + id);
   },
   // Saves a book to the database

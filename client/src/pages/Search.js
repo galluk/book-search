@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import Jumbotron from "../components/Jumbotron";
-import BookCard from "../components/BookCard"
-import SaveBtn from "../components/SaveBtn";
-// import ViewBtn from "../components/ViewBtn";
+import SearchedBookCard from "../components/SearchedBookCard"
 import API from "../utils/API";
-// import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
@@ -22,29 +19,9 @@ function Search() {
   };
 
   function displayResults(returnedBooks) {
-    console.log('saving results');
-      
-    console.log(returnedBooks);
     setBooks(returnedBooks);
-    console.log('finished displayResults');
   }
 
-  // Saves a book to the database with a given id
-  function saveBook(book) {
-    console.log('saving book');
-    const bookDetails = {
-        title: book.volumeInfo.title, 
-        authors: book.volumeInfo.authors,
-        description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks.smallThumbnail,
-        link: book.volumeInfo.previewLink
-    };  
-    console.log(bookDetails);
-    API.saveBook(bookDetails)
-    //   .then(res => loadBooks())
-      .catch(err => console.log(err));
-  }
-  
   // When the form is submitted, use the API.searchBooks method to call the google books api.
   // Then load the returned list
   function handleFormSubmit(event) {
@@ -87,14 +64,14 @@ function Search() {
               <List>
                 {books.map(book => (                  
                   <ListItem key={book.id}>
-                    <SaveBtn onClick={() => saveBook(book)} />
-                    <BookCard
+                    {/* <SaveBtn onClick={() => saveBook(book)} /> */}
+                    <SearchedBookCard
                       title={book.volumeInfo.title}
                       authors={(typeof book.volumeInfo.authors === "undefined") ? '' : book.volumeInfo.authors.join(', ')}
                       thumbnail={(typeof book.volumeInfo.imageLinks === "undefined") ? '' : book.volumeInfo.imageLinks.smallThumbnail}
                       description={book.volumeInfo.description}
                       link={book.volumeInfo.previewLink}
-                      saveBook={saveBook}
+                      // saveBook={saveBook(book)}
                       />
                   </ListItem>
                 ))}
@@ -110,6 +87,3 @@ function Search() {
   
   
   export default Search;
-  {/* </Link> */}
-    {/* <SaveBtn onClick={() => saveBook(book)} />
-    <ViewBtn onClick={() => viewBook(book.volumeInfo.previewLink)} /> */}
