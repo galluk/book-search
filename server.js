@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
@@ -17,8 +18,7 @@ app.use(express.json());
 app.use(routes);
 
 // Connect to the Mongo DB
-const PWD = 'Loid2020';
-mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://mongoLG:${encodeURIComponent(PWD)}@cluster0.xoyrx.mongodb.net/googlebooks`);
+mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://mongoLG:${encodeURIComponent(process.env.REACT_APP_DB_PASS)}@cluster0.xoyrx.mongodb.net/googlebooks`);
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
