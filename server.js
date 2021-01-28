@@ -18,7 +18,14 @@ app.use(express.json());
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://mongoLG:${encodeURIComponent(process.env.REACT_APP_DB_PASS)}@cluster0.xoyrx.mongodb.net/googlebooks`);
+mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://mongoLG:${encodeURIComponent(process.env.REACT_APP_DB_PASS)}@cluster0.xoyrx.mongodb.net/googlebooks`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
