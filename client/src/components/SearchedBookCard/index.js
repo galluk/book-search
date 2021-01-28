@@ -8,7 +8,7 @@ import "./style.css";
 
 function SearchedBookCard(props) {
   
-  // view thew preview page of the book
+  // view the preview page of the book
   function viewBook(bookURL) {
     window.open(bookURL, '_blank');
   }
